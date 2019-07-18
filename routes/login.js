@@ -1,5 +1,6 @@
 const router = require('koa-router')()
 const jwt = require('jsonwebtoken')
+const Modeldb = require('../db/index.js')
 router.prefix('/login')
 
 
@@ -35,6 +36,15 @@ router.post('/',function(ctx,next) {
       msg: '用户名或密码错误'
     }
   }
+})
+
+router.get('/dd',async function(ctx,next) {
+    let user = await Modeldb.query('vivi')
+    console.log('sss')
+    console.log(user)
+    console.log('sss')
+    return ctx.body = user
+  
 })
 
 module.exports = router
