@@ -23,6 +23,7 @@
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.0",
     "mongoose": "^5.6.5",
+    "node-rsa": "^1.0.5",
     "sequelize": "^5.9.4"
   },
   "devDependencies": {
