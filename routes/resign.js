@@ -6,7 +6,7 @@ router.prefix('/resign')
 
 router.post('/', async function(ctx, next) {
     let data = ctx.request.body
-    let result = await Users.findOne({account:data.account})
+    let result = await Users.findOne({username:data.username})
     if(result){
         return   ctx.body = {
             code: -1,
@@ -16,7 +16,7 @@ router.post('/', async function(ctx, next) {
         let code
         let msg
         const users = new Users({
-            account: data.account,
+            username: data.username,
             password: data.password
                 })
         try {

@@ -9,7 +9,7 @@ const logger = require('koa-logger')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
-// const login = require('./routes/login')
+const login = require('./routes/login')
 const resign = require('./routes/resign')
 
 // error handler
@@ -17,7 +17,7 @@ onerror(app)
 
 // middlewares
 app.use(bodyparser({
-    // enableTypes:['json', 'form', 'text']
+    enableTypes:['json', 'form', 'text']
 }))
 app.use(json())
 app.use(logger())
@@ -38,7 +38,7 @@ app.use(async(ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
-// app.use(login.routes(), login.allowedMethods())
+app.use(login.routes(), login.allowedMethods())
 app.use(resign.routes(), resign.allowedMethods())
 
 // error-handling
