@@ -11,6 +11,7 @@ const index = require('./routes/index')
 const users = require('./routes/users')
 const login = require('./routes/login')
 const resign = require('./routes/resign')
+const products = require('./routes/products')
 
 // error handler
 onerror(app)
@@ -40,6 +41,7 @@ app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(login.routes(), login.allowedMethods())
 app.use(resign.routes(), resign.allowedMethods())
+app.use(products.routes(), products.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
