@@ -4,14 +4,6 @@ router.prefix('/products')
 
 
 
-function compareAccount(req,mongo) {
-  if(req.username === mongo.username && req.password === mongo.password) {
-    return true
-  }else {
-    return false
-  }
-}
-
 router.post('/add', async function(ctx, next) {
     let data = ctx.request.body
     let result = await Products.findOne({title:data.title})
@@ -67,6 +59,25 @@ router.post('/delete', async function(ctx, next) {
     const result = await Products.where({ _id: data._id })
         .updateOne({ 
             type: 0 
+        })
+    let code
+    try {
+        code = 20000
+    } catch (error) {
+        code = 50008
+    }
+
+    return ctx.body = {
+        code,
+        result
+    }
+})
+
+router.post('/changeShelves', async function(ctx, next) {
+    let data = ctx.request.body
+    const result = await Products.where({ _id: data._id })
+        .updateOne({ 
+            status: data.status 
         })
     let code
     try {
