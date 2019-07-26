@@ -28,7 +28,8 @@ router.post('/add', async function(ctx, next) {
             price: data.price,
             url: data.url,
             desc: data.desc,
-            status: 1
+            status:1,
+            type: 1
                 })
         try {
             await products.save()
@@ -46,7 +47,7 @@ router.post('/add', async function(ctx, next) {
 })
 
 router.get('/get', async function(ctx, next) {
-    const result = await Products.find()
+    const result = await Products.find({type:1})
     let code
     try {
         code = 20000
@@ -57,6 +58,48 @@ router.get('/get', async function(ctx, next) {
     return ctx.body = {
         code,
         data:result
+    }
+})
+
+
+router.post('/delete', async function(ctx, next) {
+    let data = ctx.request.body
+    const result = await Products.where({ _id: data._id })
+        .updateOne({ 
+            type: 0 
+        })
+    let code
+    try {
+        code = 20000
+    } catch (error) {
+        code = 50008
+    }
+
+    return ctx.body = {
+        code,
+        result
+    }
+})
+
+router.post('/update', async function(ctx, next) {
+    let data = ctx.request.body
+    const result = await Products.where({ _id: data._id })
+        .updateOne({ 
+            title: data.title,
+            price: data.price,
+            url: data.url,
+            desc: data.desc,
+        })
+    let code
+    try {
+        code = 20000
+    } catch (error) {
+        code = 50008
+    }
+
+    return ctx.body = {
+        code,
+        result
     }
 })
 

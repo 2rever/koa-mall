@@ -4,7 +4,8 @@ let usersSchema = new mongoose.Schema({
     price: Number,
     url: String,
     desc: String,
-    status: String
+    status: Number,
+    type:Number
     })
 
 module.exports = mongoose.model('products', usersSchema,'products')
